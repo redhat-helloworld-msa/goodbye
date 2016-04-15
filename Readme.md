@@ -1,4 +1,4 @@
-GoodBuy demo
+GoodBye demo
 ------------
 
 This project demonstrates the motivations to use a circuit-break for REST endpoints.
@@ -25,7 +25,7 @@ Client execution
 The client will trigger 100 Threads agains the /api/nap endpoint running on the server.
 
         cd client/
-        vim src/main/java/com/redhat/developers/msa/goodbuy/client/Main.java
+        vim src/main/java/com/redhat/developers/msa/goodbye/client/Main.java
         # Uncomment the desired Thread implementation
         # Save the file and exit
         
@@ -38,7 +38,7 @@ There are 3 different Threads implementations:
 - TimeoutApacheClient - Apache HTTPClient is now configured to have 1 second of timeout.
 - HystrixClient - It uses Feign/Hystrix. Hystrix is a circuit-break implementatio from NetFlixOSS.
 
-When using `ApacheClient`, the server and client threads gets busy and the server stop receiving request on /api/goodbuy. This is very similar to a Denial-of-service attack.
+When using `ApacheClient`, the server and client threads gets busy and the server stop receiving request on /api/goodbye. This is very similar to a Denial-of-service attack.
 
 With the `TimeoutApacheClient`, the client threads fail fast now, but the server still having all threads in the thread-pool on WAIT state. 
 

@@ -14,23 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.developers.msa.goodbuy.client;
+package com.redhat.developers.msa.goodbye.client;
 
-public class Main {
+import feign.RequestLine;
 
-    private static Thread[] threads = new Thread[100];
+public interface GoodByeService {
 
-    public static void main(String[] args) throws InterruptedException {
-        for (int x = 0; x < threads.length; x++) {
-            //threads[x] = new ApacheClient();
-            // threads[x] = new TimeoutApacheClient();
-             threads[x] = new HystrixClient();
-        }
-        System.out.println("Starting Threads");
-        for (int x = 0; x < threads.length; x++) {
-            Thread.sleep(100);
-            threads[x].start();
-        }
-    }
-
+    @RequestLine("GET /api/nap")
+    public String nap();
 }

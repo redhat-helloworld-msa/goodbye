@@ -14,12 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.developers.msa.goodbuy.client;
+package com.redhat.developers.msa.goodbye.client;
 
-import feign.RequestLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 
-public interface GoodByeService {
+public class ApacheClient extends Thread {
+    
+    public void run() {
+        HttpGet httpGet = new HttpGet("http://localhost:8080/api/nap");
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        String result = null;
+        try {
+            result = EntityUtils.toString(httpClient.execute(httpGet).getEntity());
+        } catch (Exception e) {
+            result = "Nap message (Fallback)";
+        }
+        System.out.println(String.format("#%s - %s", this.getName(), result));
+    }
 
-    @RequestLine("GET /api/nap")
-    public String nap();
 }

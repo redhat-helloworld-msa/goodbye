@@ -41,7 +41,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<netflix.feign.version>8.15.1</netflix.feign.version>
 		<hystrix.version>1.5.1</hystrix.version>
-		<java.main.class>com.redhat.developers.msa.goodbuy.client.Main</java.main.class>
+		<java.main.class>com.redhat.developers.msa.goodbye.client.Main</java.main.class>
 	</properties>
 
 

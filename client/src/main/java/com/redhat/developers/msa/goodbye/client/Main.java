@@ -14,25 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.developers.msa.goodbuy.client;
+package com.redhat.developers.msa.goodbye.client;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
+public class Main {
 
-public class ApacheClient extends Thread {
-    
-    public void run() {
-        HttpGet httpGet = new HttpGet("http://localhost:8080/api/nap");
-        HttpClient httpClient = HttpClientBuilder.create().build();
-        String result = null;
-        try {
-            result = EntityUtils.toString(httpClient.execute(httpGet).getEntity());
-        } catch (Exception e) {
-            result = "Nap message (Fallback)";
+    private static Thread[] threads = new Thread[100];
+
+    public static void main(String[] args) throws InterruptedException {
+        for (int x = 0; x < threads.length; x++) {
+            //threads[x] = new ApacheClient();
+            // threads[x] = new TimeoutApacheClient();
+             threads[x] = new HystrixClient();
         }
-        System.out.println(String.format("#%s - %s", this.getName(), result));
+        System.out.println("Starting Threads");
+        for (int x = 0; x < threads.length; x++) {
+            Thread.sleep(100);
+            threads[x].start();
+        }
     }
 
 }
