@@ -16,6 +16,7 @@
  */
 package com.redhat.developers.msa.goodbye;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.ws.rs.GET;
@@ -29,7 +30,7 @@ public class GoodByeResource {
     @Path("/goodbye")
     @Produces("text/plain")
     public String hola() {
-        return "Goodbye on " + new Date().toString();
+        return "Goodbye on " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date());
     }
 
     @GET

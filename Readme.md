@@ -19,6 +19,8 @@ The /api/nap resource sleeps for 30 Seconds. It's used to demonstrate the behavi
         cd server/
         mvn clean wildfly-swarm:run
 
+The server will accept requests on <http://localhost:8080/api/goodbye> and <http://localhost:8080/api/nap>.
+
 Client execution
 ================
 

@@ -22,8 +22,15 @@ public class HystrixClient extends Thread {
 
     public void run() {
         GoodByeService service = HystrixFeign.builder()
-            .target(GoodByeService.class, "http://localhost:8080/", () -> "Nap response (fallback)");
-        System.out.println(String.format("#%s - %s", this.getName(), service.nap()));
+            // Target REST resource
+            .target(GoodByeService.class,
+                // Server
+                "http://localhost:8080/",
+                // Fallback implemenation
+                () -> "Nap response (fallback)");
+        // Service invocation
+        String result = service.nap();
+        System.out.println(String.format("#%s - %s", this.getName(), result));
     }
 
 }

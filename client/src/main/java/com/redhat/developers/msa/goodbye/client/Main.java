@@ -18,19 +18,17 @@ package com.redhat.developers.msa.goodbye.client;
 
 public class Main {
 
-    private static Thread[] threads = new Thread[100];
+    private static final int NUMBER_THREADS = 100;
 
     public static void main(String[] args) throws InterruptedException {
-        for (int x = 0; x < threads.length; x++) {
-            //threads[x] = new ApacheClient();
-            // threads[x] = new TimeoutApacheClient();
-             threads[x] = new HystrixClient();
-        }
         System.out.println("Starting Threads");
-        for (int x = 0; x < threads.length; x++) {
-            Thread.sleep(100);
-            threads[x].start();
+        for (int x = 0; x < NUMBER_THREADS; x++) {
+            Thread.sleep(20);
+             new ApacheClient().start();
+            // new TimeoutApacheClient().start();
+            // new HystrixClient().start();
         }
+        System.out.println(NUMBER_THREADS + " Threads running...");
     }
 
 }

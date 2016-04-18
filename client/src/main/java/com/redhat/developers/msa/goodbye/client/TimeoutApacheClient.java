@@ -24,22 +24,29 @@ import org.apache.http.util.EntityUtils;
 
 public class TimeoutApacheClient extends Thread {
 
+    // Timeout in millis.
+    private static final int CONNECTION_TIMEOUT_MS = 1000;
+
     public void run() {
+
+        // Apache HTTPClient creation
+        HttpGet httpGet = new HttpGet("http://localhost:8080/api/nap");
+        HttpClient httpClient = HttpClientBuilder.create().build();
+
         // Timeout configuration
-        int CONNECTION_TIMEOUT_MS = 1000; // Timeout in millis.
         RequestConfig requestConfig = RequestConfig.custom()
             .setConnectionRequestTimeout(CONNECTION_TIMEOUT_MS)
             .setConnectTimeout(CONNECTION_TIMEOUT_MS)
             .setSocketTimeout(CONNECTION_TIMEOUT_MS)
             .build();
-
-        HttpGet httpGet = new HttpGet("http://localhost:8080/api/nap");
         httpGet.setConfig(requestConfig);
-        HttpClient httpClient = HttpClientBuilder.create().build();
+
+        // Service invocation
         String result = null;
         try {
             result = EntityUtils.toString(httpClient.execute(httpGet).getEntity());
         } catch (Exception e) {
+            // Fallback
             result = "Nap message (Fallback)";
         }
         System.out.println(String.format("#%s - %s", this.getName(), result));
