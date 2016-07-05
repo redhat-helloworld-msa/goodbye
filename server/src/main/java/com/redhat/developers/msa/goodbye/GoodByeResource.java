@@ -30,7 +30,9 @@ public class GoodByeResource {
     @Path("/goodbye")
     @Produces("text/plain")
     public String hola() {
-        return "Goodbye on " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date());
+        String msg = "Goodbye on " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date()); 
+        System.out.println(msg);
+        return msg;
     }
 
     @GET

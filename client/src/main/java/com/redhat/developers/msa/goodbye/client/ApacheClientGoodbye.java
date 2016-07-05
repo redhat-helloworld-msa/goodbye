@@ -16,20 +16,27 @@
  */
 package com.redhat.developers.msa.goodbye.client;
 
-public class Main {
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 
-    private static final int NUMBER_THREADS = 100;
+public class ApacheClientGoodbye extends Thread {
 
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("Starting Threads");
-        for (int x = 0; x < NUMBER_THREADS; x++) {
-            Thread.sleep(20);
-            new ApacheClientGoodbye().start();
-            // new ApacheClient().start();
-            // new TimeoutApacheClient().start();
-            // new HystrixClient().start();
+    public void run() {
+        // Apache HTTPClient creation
+        HttpGet httpGet = new HttpGet("http://localhost:8080/api/goodbye");
+        HttpClient httpClient = HttpClientBuilder.create().build();
+
+        // Service invocation
+        String result = null;
+        try {
+            result = EntityUtils.toString(httpClient.execute(httpGet).getEntity());
+        } catch (Exception e) {
+            // Fallback
+            result = "Nap message (Fallback)";
         }
-        System.out.println(NUMBER_THREADS + " Threads running...");
+        System.out.println(String.format("#%s - %s", this.getName(), result));
     }
 
 }
