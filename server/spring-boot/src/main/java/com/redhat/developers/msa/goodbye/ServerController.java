@@ -19,30 +19,33 @@ package com.redhat.developers.msa.goodbye;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.servlet.ServletException;
 
-@Path("/")
-public class GoodByeResource {
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-    @GET
-    @Path("/goodbye")
-    @Produces("text/plain")
-    public String hola() {
+@RestController
+@RequestMapping("/api")
+public class ServerController {
+
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/goodbye", produces = "text/plain")
+    public String goodbye() throws ServletException {
         String msg = "Goodbye on " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date()); 
         System.out.println(msg);
         return msg;
     }
 
-    @GET
-    @Path("/nap")
-    @Produces("text/plain")
-    public String holaNap() throws InterruptedException {
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.GET, value = "/nap", produces = "text/plain")
+    public String goodbyeNap() throws ServletException, InterruptedException {
         System.out.println("Received request to nap 30 seconds");
         // Sleep 30 seconds
         Thread.sleep(30000);
         System.out.println("Back from the nap");
         return "Nap from " + new Date().toString();
     }
+
 }

@@ -3,7 +3,7 @@
  * Copyright 2016, Red Hat, Inc. and/or its affiliates, and individual
  * contributors by the @authors tag. See the copyright.txt in the
  * distribution for a full listing of individual contributors.
- *
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -14,22 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.redhat.developers.msa.goodbye.client;
+package com.redhat.developers.msa.goodbye;
 
-public class Main {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-    private static final int NUMBER_THREADS = 200;
+@SpringBootApplication
+public class ServerApplication {
 
-    public static void main(String[] args) throws InterruptedException {
-        System.out.println("Starting Threads");
-        for (int x = 0; x < NUMBER_THREADS; x++) {
-            Thread.sleep(20);
-             new ApacheClientGoodbye().start();
-            // new ApacheClient().start();
-            // new TimeoutApacheClient().start();
-            // new HystrixClient().start();
-        }
-        System.out.println(NUMBER_THREADS + " Threads running...");
+    public static void main(String[] args) {
+        SpringApplication.run(ServerApplication.class, args);
     }
 
 }

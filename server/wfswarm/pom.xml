@@ -20,11 +20,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.redhat.developer.msa</groupId>
-	<artifactId>goodbye-server</artifactId>
+	<artifactId>goodbye-server-wfswarm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Red Hat MSA: goodbye-server</name>
-	<description>Good bye microservice running on WildFly Swarm</description>
+	<name>Red Hat MSA: goodbye-server-wfswarm</name>
+	<description>Goodbye microservice running on WildFly Swarm</description>
 
 	<url>https://developers.redhat.com/</url>
 	<licenses>

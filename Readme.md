@@ -5,7 +5,7 @@ This project demonstrates the motivations to use a circuit-break for REST endpoi
 
 It's composed by two parts
 
-- server - REST endpoint with two resources (/api/goodbye and /api/nap). 
+- server - REST endpoint with two resources (/api/goodbye and /api/nap). There are three different implementations for the Server (WildFly Swarm, Spring Boot, Vert.x).
 - client - Java client that consumes http://localhost:8080/api/nap
 
 
@@ -16,8 +16,16 @@ Server execution
 The /api/nap resource sleeps for 30 Seconds. It's used to demonstrate the behaviour of REST producer/consumer when the resource is taking too much time to respond.
 
 
-        cd server/
-        mvn clean wildfly-swarm:run
+        $ cd server/<implementation>
+        
+        # For WildFly Swarm
+        $ mvn clean wildfly-swarm:run
+        
+        # For Spring Boot
+        $ mvn clean compile spring-boot:run
+
+        #For Vert.x
+        $ mvn clean compile exec:java
 
 The server will accept requests on <http://localhost:8080/api/goodbye> and <http://localhost:8080/api/nap>.
 

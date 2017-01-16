@@ -23,7 +23,7 @@
 	<artifactId>goodbye-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Red Hat MSA: goodbye-client</name>
-	<description>Good bye microservice client</description>
+	<description>Goodbye microservice client</description>
 
 	<url>https://developers.redhat.com/</url>
 	<licenses>
