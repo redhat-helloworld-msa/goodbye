@@ -37,15 +37,19 @@ public class ServerVerticle extends AbstractVerticle {
     }
 
     private String nap() {
-        System.out.println("Received request to nap 30 seconds");
-        // Sleep 30 seconds
+        System.out.println("Received request on Thread: " + Thread.currentThread().getName());
+        Pi.computePi(20000);
+        /*
         try {
-            Thread.sleep(30000);
+            // Sleep 30 seconds
+            // Thread.sleep(30000);
+            
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println("Back from the nap");
+        */
+        System.out.println("Back from the nap: " + Thread.currentThread().getName());
         return "Nap from " + new Date().toString();
     }
 
