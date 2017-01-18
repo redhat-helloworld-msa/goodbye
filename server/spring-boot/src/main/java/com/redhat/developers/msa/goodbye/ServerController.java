@@ -41,7 +41,7 @@ public class ServerController {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.GET, value = "/nap", produces = "text/plain")
     public String goodbyeNap() throws ServletException, InterruptedException {
-        System.out.println("Received request to nap 30 seconds");
+        System.out.println("Received request on Thread: " + Thread.currentThread().getName());
         // Sleep 30 seconds
         Thread.sleep(30000);
         System.out.println("Back from the nap");

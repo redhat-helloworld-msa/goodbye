@@ -39,7 +39,7 @@ public class GoodByeResource {
     @Path("/nap")
     @Produces("text/plain")
     public String goodbyeNap() throws InterruptedException {
-        System.out.println("Received request to nap 30 seconds");
+        System.out.println("Received request on Thread: " + Thread.currentThread().getName());
         // Sleep 30 seconds
         Thread.sleep(30000);
         System.out.println("Back from the nap");
