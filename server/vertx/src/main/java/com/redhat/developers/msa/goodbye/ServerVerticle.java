@@ -16,11 +16,11 @@
  */
 package com.redhat.developers.msa.goodbye;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import io.vertx.core.AbstractVerticle;
 import io.vertx.ext.web.Router;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ServerVerticle extends AbstractVerticle {
 
@@ -30,7 +30,15 @@ public class ServerVerticle extends AbstractVerticle {
         // Goodbye EndPoint
         router.get("/api/goodbye").handler(ctx -> ctx.response().end(goodbye()));
         // Nap  Endpoint
-        router.get("/api/nap").handler(ctx -> ctx.response().end(nap()));
+        router.get("/api/nap").handler(ctx -> {
+            vertx.<String>executeBlocking(fut -> fut.complete(nap()), false, ar -> {
+                if (ar.succeeded()) {
+                    ctx.response().end(ar.result());
+                } else {
+                    ctx.fail(ar.cause());
+                }
+            });
+        });
 
         vertx.createHttpServer().requestHandler(router::accept).listen(8080);
         System.out.println("Service running at 0.0.0.0:8080");
