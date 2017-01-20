@@ -18,6 +18,7 @@ package com.redhat.developers.msa.goodbye;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.RoutingContext;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,21 +31,13 @@ public class ServerVerticle extends AbstractVerticle {
         // Goodbye EndPoint
         router.get("/api/goodbye").handler(ctx -> ctx.response().end(goodbye()));
         // Nap  Endpoint
-        router.get("/api/nap").handler(ctx -> {
-            vertx.<String>executeBlocking(fut -> fut.complete(nap()), false, ar -> {
-                if (ar.succeeded()) {
-                    ctx.response().end(ar.result());
-                } else {
-                    ctx.fail(ar.cause());
-                }
-            });
-        });
+        router.get("/api/nap").blockingHandler(this::nap, false);
 
         vertx.createHttpServer().requestHandler(router::accept).listen(8080);
         System.out.println("Service running at 0.0.0.0:8080");
     }
 
-    private String nap() {
+    private void nap(RoutingContext ctx) {
         System.out.println("Received request on Thread: " + Thread.currentThread().getName());
         Pi.computePi(20000);
         /*
@@ -58,7 +51,7 @@ public class ServerVerticle extends AbstractVerticle {
         }
         */
         System.out.println("Back from the nap: " + Thread.currentThread().getName());
-        return "Nap from " + new Date().toString();
+        ctx.response().end("Nap from " + new Date().toString());
     }
 
     private String goodbye() {
