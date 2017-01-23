@@ -16,77 +16,74 @@
 	limitations under the License.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.redhat.developer.msa</groupId>
-	<artifactId>goodbye-client</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Red Hat MSA: goodbye-client</name>
-	<description>Goodbye microservice client</description>
+    <groupId>com.redhat.developer.msa</groupId>
+    <artifactId>goodbye-client</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Red Hat MSA: goodbye-client</name>
+    <description>Goodbye microservice client</description>
 
-	<url>https://developers.redhat.com/</url>
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<distribution>repo</distribution>
-			<url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-		</license>
-	</licenses>
+    <url>https://developers.redhat.com/</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
 
-	<properties>
-		<version.exec.plugin>1.4.0</version.exec.plugin>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<netflix.feign.version>8.15.1</netflix.feign.version>
-		<hystrix.version>1.5.1</hystrix.version>
-		<java.main.class>com.redhat.developers.msa.goodbye.client.Main</java.main.class>
-	</properties>
-
-
-	<dependencies>
-		<!-- Add Apache HTTP Client (for chaining invocation) -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.2</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>com.netflix.feign</groupId>
-			<artifactId>feign-core</artifactId>
-			<version>${netflix.feign.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.netflix.feign</groupId>
-			<artifactId>feign-hystrix</artifactId>
-			<version>${netflix.feign.version}</version>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<finalName>goodbye-client</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>${version.exec.plugin}</version>
-				<configuration>
-					<executable>java</executable>
-					<arguments>
-						<argument>-Dcom.sun.management.jmxremote</argument>
-						<argument>-classpath</argument>
-						<!-- automatically creates the classpath using all project dependencies,
-							also adding the project build directory -->
-						<classpath />
-						<argument>${java.main.class}</argument>
-					</arguments>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+    <properties>
+        <version.exec.plugin>1.4.0</version.exec.plugin>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netflix.feign.version>8.15.1</netflix.feign.version>
+        <hystrix.version>1.5.1</hystrix.version>
+        <java.main.class>com.redhat.developers.msa.goodbye.client.Main</java.main.class>
+    </properties>
 
 
+    <dependencies>
+        <!-- Add Apache HTTP Client (for chaining invocation) -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>${netflix.feign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-hystrix</artifactId>
+            <version>${netflix.feign.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>goodbye-client</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>${java.main.class}</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
