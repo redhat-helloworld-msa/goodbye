@@ -42,7 +42,7 @@ The client will trigger 210 Threads against the /api/nap endpoint running on the
         # Uncomment the desired Thread implementation
         # Save the file and exit
         
-        mvn compile exec:exec
+        mvn compile exec:java
 
 
 There are 3 different Threads implementations:
