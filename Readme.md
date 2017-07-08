@@ -26,7 +26,7 @@ The /api/nap resource blocks for several seconds as it is calculating Pi. It's u
         $ mvn clean compile spring-boot:run
 
         # For Vert.x
-        $ vertx run --instances 4 -Dvertx.options.workerPoolSize=100 src/main/java/com/redhat/developers/msa/goodbye/ServerVerticle.java
+        $ vertx run --instances 1 -Dvertx.options.workerPoolSize=100 src/main/java/com/redhat/developers/msa/goodbye/ServerVerticle.java
         
         Note: Vert.x also runs as a fat jar, in this case we just wanted to "fix" the thread pool to 100 like it was for Spring Boot
 
