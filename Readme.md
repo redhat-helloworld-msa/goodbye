@@ -25,7 +25,7 @@ The /api/nap resource blocks for several seconds as it is calculating Pi. It's u
         # For Spring Boot
         $ mvn clean compile spring-boot:run
 
-        #For Vert.x
+        # For Vert.x
         $ mvn clean compile exec:java
 
 The server will accept requests on <http://localhost:8080/api/goodbye> and <http://localhost:8080/api/nap>.
