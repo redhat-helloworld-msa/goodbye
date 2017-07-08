@@ -30,7 +30,7 @@ public class GoodByeResource {
     @Path("/goodbye")
     @Produces("text/plain")
     public String goodbye() {
-        String msg = "Goodbye on " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date()); 
+        String msg = "Goodbye with Wildfly Swarm " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date()); 
         System.out.println(msg);
         return msg;
     }
@@ -43,7 +43,7 @@ public class GoodByeResource {
         // Sleep 30 seconds
         // Thread.sleep(30000);
         Pi.computePi(20000);
-        System.out.println("Back from the nap");
+        System.out.println("Back from the nap with " + Thread.currentThread().getName());
         return "Nap from " + new Date().toString();
     }
 }

@@ -55,7 +55,7 @@ public class ServerVerticle extends AbstractVerticle {
     }
 
     private String goodbye() {
-        String msg = "Goodbye on " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date()); 
+        String msg = "Goodbye with Vert.x " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date()); 
         System.out.println(msg);
         return msg;
     }
