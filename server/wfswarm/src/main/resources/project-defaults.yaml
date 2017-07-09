@@ -1,0 +1,4 @@
+swarm:
+  io:
+    default: 
+      task-max-threads: 100

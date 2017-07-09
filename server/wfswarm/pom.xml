@@ -98,14 +98,7 @@
 				<groupId>org.wildfly.swarm</groupId>
 				<artifactId>wildfly-swarm-plugin</artifactId>
 				<version>${version.wildfly.swarm}</version>
-				<!-- not working, i have the wrong "base" standalone.xml 
-      	        <configuration>
-      			    <arguments>
-            			<argument>-c</argument>
-            			<argument>standalone.xml</argument>
-          			</arguments>
-        		</configuration>
-				-->
+				
 				<executions>
 					<execution>
 						<goals>
