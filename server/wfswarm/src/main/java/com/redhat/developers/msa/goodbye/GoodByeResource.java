@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
 import javax.ejb.Singleton;
 import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.ws.rs.GET;
@@ -48,6 +49,7 @@ public class GoodByeResource {
 	@GET
 	@Path("/nap")
 	@Produces("text/plain")
+	@Asynchronous
 	public void goodbyeNap(@Suspended final AsyncResponse response) throws InterruptedException {
 
 		System.out.println("Received request on Thread: " + Thread.currentThread().getName());
