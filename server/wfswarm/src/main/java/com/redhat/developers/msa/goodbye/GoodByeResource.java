@@ -19,31 +19,44 @@ package com.redhat.developers.msa.goodbye;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
+import javax.ejb.Singleton;
+import javax.enterprise.concurrent.ManagedExecutorService;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
+
+import com.redhat.developers.msa.goodbye.Pi;
 
 @Path("/")
+@Singleton
 public class GoodByeResource {
+	@Resource
+	private ManagedExecutorService executor;
 
-    @GET
-    @Path("/goodbye")
-    @Produces("text/plain")
-    public String goodbye() {
-        String msg = "Goodbye with Wildfly Swarm " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date()); 
-        System.out.println(msg);
-        return msg;
-    }
+	@GET
+	@Path("/goodbye")
+	@Produces("text/plain")
+	public String goodbye() {
+		String msg = "Goodbye with Wildfly Swarm " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SS").format(new Date());
+		System.out.println(msg);
+		return msg;
+	}
 
-    @GET
-    @Path("/nap")
-    @Produces("text/plain")
-    public String goodbyeNap() throws InterruptedException {
-        System.out.println("Received request on Thread: " + Thread.currentThread().getName());
-        // Sleep 30 seconds
-        // Thread.sleep(30000);
-        Pi.computePi(20000);
-        System.out.println("Back from the nap with " + Thread.currentThread().getName());
-        return "Nap from " + new Date().toString();
-    }
+	@GET
+	@Path("/nap")
+	@Produces("text/plain")
+	@Asynchronous
+	public void goodbyeNap(@Suspended final AsyncResponse response) throws InterruptedException {
+
+		System.out.println("Received request on Thread: " + Thread.currentThread().getName());
+		// Sleep 30 seconds
+		// Thread.sleep(30000);
+		executor.submit(() -> { Pi.computePi(20000); System.out.println("Executing on thread " + Thread.currentThread().getName()); });
+		System.out.println("Back from the nap with " + Thread.currentThread().getName());
+		response.resume("Nap from " + new Date().toString());
+	}
 }
